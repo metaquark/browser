@@ -144,7 +144,7 @@ class Browser
   end
 
   def wp6?
-    ua =~ /Windows Phone 6/
+    !!(ua =~ /Windows Phone 6/)
   end
 
   # Return a meta info about this browser.

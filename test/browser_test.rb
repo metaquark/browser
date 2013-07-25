@@ -570,6 +570,7 @@ class BrowserTest < Test::Unit::TestCase
     assert_equal "6", @browser.version
     assert @browser.mobile?
     assert ! @browser.tablet?
+    assert @browser.wp6?
   end
 
   def test_kindle_monochrome
