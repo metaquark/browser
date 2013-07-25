@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require "test_helper"
+require './test_helper'
 
 class BrowserTest < Test::Unit::TestCase
   IPHONE         = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/1A542a Safari/419.3"
@@ -39,6 +39,7 @@ class BrowserTest < Test::Unit::TestCase
   IOS4           = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A293 Safari/6531.22.7"
   IOS5           = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3"
   IOS6           = "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25"
+  WINDOWS_PHONE6 = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; Vodafone/1.0/HTC_HD_mini/1.41.162.1 (10904); Windows Phone 6.5.3.5)"
 
   def setup
     @browser = Browser.new
@@ -558,6 +559,15 @@ class BrowserTest < Test::Unit::TestCase
 
     assert @browser.ie?
     assert_equal "7", @browser.version
+    assert @browser.mobile?
+    assert ! @browser.tablet?
+  end
+
+  def test_windows_phone6
+    @browser.ua = WINDOWS_PHONE6
+
+    assert @browser.ie?
+    assert_equal "6", @browser.version
     assert @browser.mobile?
     assert ! @browser.tablet?
   end

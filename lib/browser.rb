@@ -143,6 +143,10 @@ class Browser
     !!(ua =~ /(Opera|OPR)/)
   end
 
+  def wp6?
+    ua =~ /Windows Phone 6/
+  end
+
   # Return a meta info about this browser.
   def meta
     Meta.constants.each_with_object(Set.new) do |meta_name, meta|
