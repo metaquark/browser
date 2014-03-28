@@ -45,6 +45,7 @@ class BrowserTest < Test::Unit::TestCase
   OPERA_MOBI            = "Opera/9.8 (Android 2.3.5; Linux; Opera Mobi/ADR-1205181138; U; en) Presto/2.10.254 Version/12.00"
   WINDOWS_PHONE         = "Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0; DELL; Venue Pro)"
   WINDOWS_PHONE8        = "Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; NOKIA; Lumia 920)"
+  WINDOWS_PHONE8_DESKTOP = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0; ARM; Touch; WPDesktop)"
   WINDOWS_MOBILE        = "Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 6.12)"
   WINDOWS8              = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)"
   WINDOWS81             = "Mozilla/5.0 (IE 11.0; Windows NT 6.3; Trident/7.0; .NET4.0E; .NET4.0C; rv:11.0) like Gecko"
@@ -748,6 +749,16 @@ class BrowserTest < Test::Unit::TestCase
     assert @browser.windows_phone?
     assert ! @browser.windows_mobile?
     assert ! @browser.tablet?
+  end
+
+  def test_windows_phone8_desktop
+    @browser.ua = WINDOWS_PHONE8_DESKTOP
+
+    assert @browser.ie?
+    assert_equal "10", @browser.version
+    assert ! @browser.mobile?
+    assert @browser.windows?
+    assert @browser.windows_phone_desktop?
   end
 
   def test_windows_mobile

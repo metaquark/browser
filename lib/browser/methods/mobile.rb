@@ -15,6 +15,11 @@ class Browser
       !!(ua =~ /(BlackBerry)/)
     end
 
+    # Detect Windows Phone 8 Internet Explorer running in "Desktop" mode
+    def windows_phone_desktop?
+      !!(ua =~ /WPDesktop/)
+    end
+
     private
     def detect_mobile?
       ua =~ /(Mobi(le)?|Symbian|MIDP|Windows CE)/ || blackberry? || psp? || opera_mini?
