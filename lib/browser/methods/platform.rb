@@ -80,12 +80,12 @@ class Browser
 
     # Detect if current platform is Windows Mobile.
     def windows_mobile?
-      !!(ua =~ /Windows CE/)
+      !!(ua =~ /Windows CE/) || (ua =~ /Windows Phone/ && ie6?)
     end
 
     # Detect if current platform is Windows Phone.
     def windows_phone?
-      !!(ua =~ /Windows Phone/)
+      !!(ua =~ /Windows Phone/) && (version.to_i >= 7 || !ie?)
     end
 
     # Detect if current platform is Windows in 64-bit architecture.

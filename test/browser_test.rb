@@ -47,6 +47,7 @@ class BrowserTest < Test::Unit::TestCase
   WINDOWS_PHONE8        = "Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; NOKIA; Lumia 920)"
   WINDOWS_PHONE8_DESKTOP = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0; ARM; Touch; WPDesktop)"
   WINDOWS_MOBILE        = "Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 6.12)"
+  WINDOWS_MOBILE6       = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; Vodafone/1.0/HTC_HD_mini/1.41.162.1 (10904); Windows Phone 6.5.3.5)"
   WINDOWS8              = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)"
   WINDOWS81             = "Mozilla/5.0 (IE 11.0; Windows NT 6.3; Trident/7.0; .NET4.0E; .NET4.0C; rv:11.0) like Gecko"
   SURFACE               = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; ARM; Trident/6.0; Touch)"
@@ -547,6 +548,16 @@ class BrowserTest < Test::Unit::TestCase
 
   def test_detect_windows_mobile
     @browser.ua = WINDOWS_MOBILE
+
+    assert @browser.mobile?
+    assert @browser.windows?
+    assert @browser.windows_mobile?
+    assert ! @browser.windows_phone?
+    assert ! @browser.tablet?
+  end
+
+  def test_detect_windows_mobile6
+    @browser.ua = WINDOWS_MOBILE6
 
     assert @browser.mobile?
     assert @browser.windows?
