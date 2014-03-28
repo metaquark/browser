@@ -42,6 +42,9 @@ class BrowserTest < Test::Unit::TestCase
   IOS6           = "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25"
   WINDOWS_PHONE6 = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; Vodafone/1.0/HTC_HD_mini/1.41.162.1 (10904); Windows Phone 6.5.3.5)"
 
+  WINDOWS_PHONE8 = "Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; HTC;Windows Phone 8X by HTC)"
+  WINDOWS_PHONE8_DESKTOP = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0; ARM; Touch; WPDesktop)"
+
   def setup
     @browser = Browser.new
   end
@@ -582,6 +585,26 @@ class BrowserTest < Test::Unit::TestCase
     assert @browser.mobile?
     assert ! @browser.tablet?
     assert @browser.wp6?
+  end
+
+  def test_windows_phone8
+    @browser.ua = WINDOWS_PHONE8
+
+    assert @browser.ie?
+    assert_equal "10", @browser.version
+    assert @browser.mobile?
+    assert ! @browser.tablet?
+  end
+
+  def test_windows_phone8_desktop
+    @browser.ua = WINDOWS_PHONE8_DESKTOP
+
+    assert @browser.ie?
+    assert_equal "10", @browser.version
+    assert @browser.mobile?
+    assert @browser.windows?
+    assert ! @browser.tablet?
+    assert @browser.windows_phone_desktop?
   end
 
   def test_kindle_monochrome

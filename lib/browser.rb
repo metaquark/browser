@@ -147,6 +147,10 @@ class Browser
     !!(ua =~ /Windows Phone 6/)
   end
 
+  def windows_phone_desktop?
+    !!(ua =~ /WPDesktop/)
+  end
+
   # Return a meta info about this browser.
   def meta
     Meta.constants.each_with_object(Set.new) do |meta_name, meta|
