@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require './test_helper'
+require 'test_helper'
 
 class BrowserTest < Test::Unit::TestCase
   IPHONE         = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/1A542a Safari/419.3"
