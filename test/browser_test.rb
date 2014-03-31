@@ -43,6 +43,7 @@ class BrowserTest < Test::Unit::TestCase
   SAMSUNG               = "Mozilla/5.0 (Linux; U; Android 4.0.4; en-us; SAMSUNG-SGH-I497 Build/IMM76D) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30"
   OPERA_MINI            = "Opera/9.80 (Android; Opera Mini/7.029952/28.2359;u; fr) Presto/2.8.119 Version/11.10"
   OPERA_MOBI            = "Opera/9.8 (Android 2.3.5; Linux; Opera Mobi/ADR-1205181138; U; en) Presto/2.10.254 Version/12.00"
+  OPERA_ANDROID  = "Mozilla/5.0 (Linux; Android 4.1.2; GT-I9300 Build/JZO54K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.63 Mobile Safari/537.36 OPR/15.0.1162.61541"
   WINDOWS_PHONE         = "Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0; DELL; Venue Pro)"
   WINDOWS_PHONE8        = "Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; NOKIA; Lumia 920)"
   WINDOWS_PHONE8_DESKTOP = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0; ARM; Touch; WPDesktop)"
@@ -319,6 +320,16 @@ class BrowserTest < Test::Unit::TestCase
     assert ! @browser.chrome?
     assert_equal "28.0.1500.37", @browser.full_version
     assert_equal "28", @browser.version
+  end
+
+  def test_detect_opera_android
+    @browser.ua = OPERA_ANDROID
+
+    assert @browser.android?, %Q{Browser should be android but isn't}
+    assert @browser.opera?, %Q{Browser should be opera but isn't}
+    assert  @browser.modern?
+    assert_equal '28.0.1500.63', @browser.full_version
+    assert_equal '28', @browser.version
   end
 
   def test_detect_firefox
